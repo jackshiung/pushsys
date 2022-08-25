@@ -1,0 +1,37 @@
+version: '2'
+services:
+  nginx_certbot:
+    restart: unless-stopped
+    image: staticfloat/nginx-certbot
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      CERTBOT_EMAIL: bear00107@gmail.com
+    volumes:
+      - /root/workplace/nginx-certbot/conf.d:/etc/nginx/user.conf.d:ro
+      - /root/workplace/nginx-certbot/letsencrypt:/etc/letsencrypt
+      - /root/workplace/nginx-certbot/certbot_extra_domains:/etc/certbot/extra_domains:ro
+  rabbitmq:
+    restart: always
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: jjdigi
+      RABBITMQ_DEFAULT_PASS: JJdigi0857
+  database:
+    restart: always
+    image: mysql:8
+    container_name: mysql_8
+    ports: 
+     - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: jjpassw0rd
+      MYSQL_DATABASE: jj_mms
+    volumes:
+      - /root/workplace/mysql/config:/etc/mysql/conf.d \
+      - /root/workplace/mysql/data:/var/lib/mysql \
+    command: mysqld --default-authentication-plugin=mysql_native_password

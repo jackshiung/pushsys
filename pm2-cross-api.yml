@@ -1,0 +1,8 @@
+apps:
+   - name: cross-api
+     cwd: ./dist
+     script: index.js
+     watch: true
+     exec_mode: cluster
+     instances: 4
+     max_memory_restart: 2048M

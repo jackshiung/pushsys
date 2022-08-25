@@ -1,0 +1,23 @@
+{
+    "extends": "@tsconfig/svelte/tsconfig.json",
+    "compilerOptions": {
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "ES6",
+        "importsNotUsedAsValues": "remove",
+        "types": [
+            "svelte",
+            "node"
+        ]
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+        "node_modules/*",
+        "__sapper__/*",
+        "public/*",
+        "./backend-src/**/*"
+    ]
+}
